@@ -22,7 +22,7 @@ pod 'Pilot'
 
 ## Author
 
-devmisu, fchacaltana@solera.pe
+Felix Chacaltana, felix.chacaltana.felix@gmail.com
 
 ## License
 
