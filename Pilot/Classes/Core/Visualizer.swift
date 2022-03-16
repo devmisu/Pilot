@@ -16,7 +16,7 @@ struct Visualizer {
     
     func present() {
         
-        guard let bundle = Bundle(identifier: "com.fchacaltana.pilot") else {
+        guard let bundle = Bundle(identifier: "org.cocoapods.Pilot") else {
             fatalError("Error al instanciar el bundle.")
         }
         
