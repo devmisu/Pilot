@@ -24,6 +24,6 @@ final class MemoryStorage: Storage {
         let str = search.trimmingCharacters(in: .whitespacesAndNewlines)
         
         if str == "" { return self.requests }
-        return self.requests.filter({ $0.path.contains(search) })
+        return self.requests.filter({ $0.path.contains(str) })
     }
 }
