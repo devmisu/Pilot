@@ -22,8 +22,4 @@ public struct Pilot {
     public func configure() {
         URLProtocol.registerClass(Proxy.self)
     }
-    
-    public func present() {
-        self.visualizer.present()
-    }
 }

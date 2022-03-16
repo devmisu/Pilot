@@ -20,6 +20,7 @@ final class Proxy: URLProtocol {
         if URLProtocol.property(forKey: "is_handled", in: request) as? Bool == true {
             return false
         }
+        
         return true
     }
     
@@ -35,14 +36,21 @@ final class Proxy: URLProtocol {
         let newRequest = mutableRequest as URLRequest
         
         self.dataTask = URLSession.shared.dataTask(with: newRequest, completionHandler: { data, response, error in
+            
             if let data = data, let response = response {
+                
                 self.client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
                 self.client?.urlProtocol(self, didLoad: data)
+                
             } else if let error = error {
+                
                 self.client?.urlProtocol(self, didFailWithError: error)
             }
+            
             self.client?.urlProtocolDidFinishLoading(self)
-            Pilot.shared.storage.subscribe(newRequest, data: data, response: response, error: error)
+            
+            let rq = Builder.build(with: self.dataTask, request: newRequest, data: data, response: response, error: error)
+            Pilot.shared.storage.subscribe(rq)
         })
         
         self.dataTask?.resume()

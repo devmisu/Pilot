@@ -13,5 +13,5 @@ import Foundation
  */
 protocol Storage {
     var requests: [Request]! { get }
-    func subscribe(_ request: URLRequest, data: Data?, response: URLResponse?, error: Error?)
+    func subscribe(_ request: Request)
 }

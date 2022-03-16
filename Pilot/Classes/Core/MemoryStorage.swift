@@ -15,24 +15,7 @@ final class MemoryStorage: Storage {
     
     var requests: [Request]! = [Request]()
     
-    func subscribe(_ request: URLRequest, data: Data?, response: URLResponse?, error: Error?) {
-        
-        guard let url = request.url?.absoluteString,
-              let httpMethod = request.httpMethod,
-              let method = Method(rawValue: httpMethod),
-              let httpResponse = response as? HTTPURLResponse,
-              let statusCode = StatusCode(rawValue: httpResponse.statusCode),
-              let data = data,
-              let rawData = String(data: data, encoding: .utf8)
-        else {
-            return
-        }
-        
-        let newRequest = Request(url: url,
-                                 method: method,
-                                 statusCode: statusCode,
-                                 response: Response(rawData: rawData))
-        
-        self.requests.append(newRequest)
+    func subscribe(_ request: Request) {
+        self.requests.append(request)
     }
 }

@@ -14,21 +14,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = URL(string: "https://httpbin.org/post")!
+        let url = URL(string: "https://httpbin.org/json")!
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.httpBody = try? JSONSerialization.data(withJSONObject: [ "hello": "world" ], options: [])
+//        request.httpBody = try? JSONSerialization.data(withJSONObject: [ "hello": "world" ], options: [])
         
         URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
             guard let data = data, let str = String(data: data, encoding: .utf8) else { return }
             print(str)
         }).resume()
-    }
-
-    @IBAction private func showInspector(_ sender: UIButton) {
-        Pilot.shared.present()
     }
 }
 

@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum Method: String {
+    case get = "GET", post = "POST", put = "PUT", delete = "DELETE"
+}
+
 enum StatusCode: Int {
     case Ok = 200
     case MultipleChoices = 300
@@ -22,8 +26,13 @@ enum StatusCode: Int {
         default: return ""
         }
     }
-}
-
-enum Method: String {
-    case get = "GET", post = "POST", put = "PUT", delete = "DELETE"
+    
+    var message: String {
+        switch self {
+        case .Ok: return "Ok"
+        case .MultipleChoices: return "Multiple Choices"
+        case .BadRequest: return "Bad Request"
+        case .InternalServerError: return "Internal Server Error"
+        }
+    }
 }
