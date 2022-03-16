@@ -1,0 +1,38 @@
+//
+//  Visualizer.swift
+//  Pilot
+//
+//  Created by Felix Chacaltana on 15/03/22.
+//
+
+import Foundation
+import UIKit
+
+/*
+ iOSKit
+ Soporte para iOS (UIKit).
+ */
+struct Visualizer {
+    
+    func present() {
+        
+        guard let bundle = Bundle(identifier: "com.fchacaltana.pilot") else {
+            fatalError("Error al instanciar el bundle.")
+        }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: bundle)
+        
+        guard let vc = storyboard.instantiateInitialViewController() else {
+            fatalError("Error al instanciar el `MainViewController`.")
+        }
+        
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first,
+              let rootVc = window.rootViewController
+        else {
+            fatalError("Error al obtener el `rootViewController`.")
+        }
+        
+        rootVc.present(vc, animated: true, completion: nil)
+    }
+}
