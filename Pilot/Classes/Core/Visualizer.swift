@@ -26,13 +26,26 @@ struct Visualizer {
             fatalError("Error al instanciar el `MainViewController`.")
         }
         
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = windowScene.windows.first,
-              let rootVc = window.rootViewController
-        else {
-            fatalError("Error al obtener el `rootViewController`.")
+        if #available(iOS 13.0, *) {
+            
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first,
+                  let rootVc = window.rootViewController
+            else {
+                fatalError("Error al obtener el `rootViewController`.")
+            }
+            
+            rootVc.present(vc, animated: true, completion: nil)
+            
+        } else {
+            
+            guard let window = UIApplication.shared.windows.first,
+                  let rootVc = window.rootViewController
+            else {
+                fatalError("Error al obtener el `rootViewController`.")
+            }
+            
+            rootVc.present(vc, animated: true, completion: nil)
         }
-        
-        rootVc.present(vc, animated: true, completion: nil)
     }
 }
