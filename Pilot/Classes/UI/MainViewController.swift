@@ -75,6 +75,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 extension MainViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.dataSource = Pilot.shared.storage.fetchRequests(searchText)
+        self.dataSource = Pilot.shared.storage.fetchRequests(searchText.lowercased())
     }
 }
