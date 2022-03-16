@@ -11,12 +11,19 @@ import UIKit
 final class MainViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var searchBar: UISearchBar!
+    
+    var dataSource = [Request]() {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
     
     // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.reloadData()
+        self.dataSource = Pilot.shared.storage.fetchRequests(self.searchBar.text ?? "")
     }
     
     // MARK: - Navigation
@@ -43,14 +50,14 @@ extension MainViewController {
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Pilot.shared.storage.requests.count
+        return self.dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "RequestTableViewCell", for: indexPath) as! RequestTableViewCell
         
-        let request = Pilot.shared.storage.requests[indexPath.row]
+        let request = self.dataSource[indexPath.row]
         cell.populateCell(request)
         
         return cell
@@ -58,7 +65,16 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let request = Pilot.shared.storage.requests[indexPath.row]
+        let request = self.dataSource[indexPath.row]
         self.performSegue(withIdentifier: "RequestViewController", sender: request)
+    }
+}
+
+// MARK: - UISearchBarDelegate
+
+extension MainViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.dataSource = Pilot.shared.storage.fetchRequests(searchText)
     }
 }

@@ -18,4 +18,12 @@ final class MemoryStorage: Storage {
     func subscribe(_ request: Request) {
         self.requests.append(request)
     }
+    
+    func fetchRequests(_ search: String) -> [Request] {
+        
+        let str = search.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if str == "" { return self.requests }
+        return self.requests.filter({ $0.path.contains(search) })
+    }
 }

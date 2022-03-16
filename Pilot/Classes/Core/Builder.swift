@@ -17,6 +17,7 @@ struct Builder {
         
         // Parse data
         let url = request.url?.absoluteString ?? ""
+        let path = request.url?.path ?? ""
         let httpMethod = request.httpMethod ?? ""
         let method = Method(rawValue: httpMethod) ?? .get
         let httpResponse = (response as? HTTPURLResponse) ?? HTTPURLResponse()
@@ -31,6 +32,7 @@ struct Builder {
         let objResponse = Response(rawData: rawData)
         
         return Request(url: url,
+                       path: path,
                        method: method,
                        statusCode: statusCode,
                        sendBytes: sendBytesFormatted,

@@ -17,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2cS-xf-lyi">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2cS-xf-lyi">
+                                <rect key="frame" x="0.0" y="139" width="414" height="757"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -72,18 +72,28 @@
                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="J0N-pE-an5"/>
                                 </connections>
                             </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="agW-jY-yO0">
+                                <rect key="frame" x="0.0" y="88" width="414" height="51"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="Gzu-xO-KIL"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="agW-jY-yO0" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="17a-8T-So9"/>
                             <constraint firstItem="2cS-xf-lyi" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="GXJ-WB-OXR"/>
                             <constraint firstAttribute="bottom" secondItem="2cS-xf-lyi" secondAttribute="bottom" id="Hn7-XA-qbl"/>
+                            <constraint firstItem="2cS-xf-lyi" firstAttribute="top" secondItem="agW-jY-yO0" secondAttribute="bottom" id="So0-gs-bAq"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="2cS-xf-lyi" secondAttribute="trailing" id="Zm0-35-xF7"/>
-                            <constraint firstItem="2cS-xf-lyi" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="qNP-cx-sIe"/>
+                            <constraint firstItem="agW-jY-yO0" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="l9Y-jl-aQ9"/>
+                            <constraint firstItem="agW-jY-yO0" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="vD8-9y-vR2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Pilot" id="zOb-rp-JfP">
-                        <barButtonItem key="backBarButtonItem" title="Atrás" id="72d-Ni-B6Q"/>
+                        <barButtonItem key="backBarButtonItem" title=" " id="PyI-G0-jHH"/>
                         <barButtonItem key="rightBarButtonItem" title="Synchronize" image="arrow.clockwise" catalog="system" id="jeT-Yf-iQM">
                             <connections>
                                 <action selector="syncData:" destination="Y6W-OH-hqX" id="lNp-xB-XQl"/>
@@ -91,6 +101,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="agW-jY-yO0" id="CYv-uU-KxI"/>
                         <outlet property="tableView" destination="2cS-xf-lyi" id="7He-P1-SKD"/>
                         <segue destination="Pgg-70-Yxn" kind="show" identifier="RequestViewController" id="eFH-Yc-rUD"/>
                     </connections>

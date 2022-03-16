@@ -28,7 +28,7 @@ final class RequestViewController: UIViewController {
         super.viewDidLoad()
         
         self.setStackView(0)
-        self.title = request.url
+        self.title = request.path
         
         // Overview
         self.lblSendBytes.text = self.request.sendBytes
@@ -52,11 +52,8 @@ final class RequestViewController: UIViewController {
     
     // MARK: - Methods
     
-    private func setStackView(_ index: Int) {
-        
-        if index < 0 || index > self.stackViews.count {
-            return
-        }
+    private func setStackView(_ index: Int ) {
+        if !(0..<self.stackViews.count).contains(index) { return }
         
         self.stackViews.enumerated().forEach { i, e in
             e.isHidden = (i != index)

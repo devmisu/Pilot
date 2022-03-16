@@ -14,4 +14,5 @@ import Foundation
 protocol Storage {
     var requests: [Request]! { get }
     func subscribe(_ request: Request)
+    func fetchRequests(_ search: String) -> [Request]
 }

@@ -9,6 +9,7 @@ import Foundation
 
 struct Request {
     var url: String
+    var path: String
     var method: Method
     var statusCode: StatusCode
     var sendBytes: String
