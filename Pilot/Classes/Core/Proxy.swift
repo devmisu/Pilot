@@ -13,7 +13,7 @@ import Foundation
  */
 final class Proxy: URLProtocol {
     
-    var dataTask: URLSessionDataTask?
+    var dataTask: URLSessionTask?
     
     override class func canInit(with request: URLRequest) -> Bool {
         

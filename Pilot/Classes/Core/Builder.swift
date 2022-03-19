@@ -13,7 +13,7 @@ struct Builder {
         
     }
     
-    static func build(with dataTask: URLSessionDataTask?, request: URLRequest, data: Data?, response: URLResponse?, error: Error?) -> Request {
+    static func build(with dataTask: URLSessionTask?, request: URLRequest, data: Data?, response: URLResponse?, error: Error?) -> Request {
         
         // Parse data
         let url = request.url?.absoluteString ?? ""
