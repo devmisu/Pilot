@@ -32,7 +32,6 @@ final class Proxy: URLProtocol {
         
         let mutableRequest = (request as NSURLRequest).mutableCopy() as! NSMutableURLRequest
         URLProtocol.setProperty(true, forKey: "is_handled", in: mutableRequest)
-        URLProtocol.setProperty(UUID().uuidString, forKey: "uuid", in: mutableRequest)
         let newRequest = mutableRequest as URLRequest
         
         self.dataTask = URLSession.shared.dataTask(with: newRequest, completionHandler: { data, response, error in
